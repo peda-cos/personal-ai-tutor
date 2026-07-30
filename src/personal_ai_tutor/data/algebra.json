@@ -1,0 +1,958 @@
+{
+  "subject": "K-12 Algebra",
+  "version": 1,
+  "concepts": [
+    {
+      "id": "number_line",
+      "title": "The Number Line",
+      "strand": "Number Foundations",
+      "difficulty": 1,
+      "prereqs": [],
+      "lesson": "A number line puts every number in order by distance and direction from zero. Moving right increases a value and moving left decreases it.",
+      "oer": {
+        "title": "OpenStax Elementary Algebra 2e, 1.1 Introduction to Whole Numbers",
+        "url": "https://openstax.org/books/elementary-algebra-2e/pages/1-1-introduction-to-whole-numbers"
+      },
+      "family": "number_line",
+      "family_mode": "plot"
+    },
+    {
+      "id": "integers_compare",
+      "title": "Comparing Integers",
+      "strand": "Number Foundations",
+      "difficulty": 1,
+      "prereqs": ["number_line"],
+      "lesson": "On a number line, the integer farther to the right is greater. Negative numbers get smaller as their distance from zero grows.",
+      "oer": {
+        "title": "OpenStax Elementary Algebra 2e, 1.3 Add and Subtract Integers",
+        "url": "https://openstax.org/books/elementary-algebra-2e/pages/1-3-add-and-subtract-integers"
+      },
+      "family": "number_line",
+      "family_mode": "compare"
+    },
+    {
+      "id": "absolute_value",
+      "title": "Absolute Value",
+      "strand": "Number Foundations",
+      "difficulty": 2,
+      "prereqs": ["integers_compare"],
+      "lesson": "Absolute value is a number's distance from zero, so it is never negative. Both 5 and -5 are five units from zero.",
+      "oer": {
+        "title": "OpenStax Elementary Algebra 2e, 1.8 The Real Numbers",
+        "url": "https://openstax.org/books/elementary-algebra-2e/pages/1-8-the-real-numbers"
+      },
+      "family": "number_line",
+      "family_mode": "absolute"
+    },
+    {
+      "id": "integer_add_sub",
+      "title": "Adding and Subtracting Integers",
+      "strand": "Number Foundations",
+      "difficulty": 1,
+      "prereqs": ["number_line"],
+      "lesson": "Adding a negative moves left and subtracting a negative moves right. Keep the sign of the larger absolute value when the signs differ.",
+      "oer": {
+        "title": "OpenStax Elementary Algebra 2e, 1.3 Add and Subtract Integers",
+        "url": "https://openstax.org/books/elementary-algebra-2e/pages/1-3-add-and-subtract-integers"
+      },
+      "family": "integer_ops",
+      "family_mode": "addsub"
+    },
+    {
+      "id": "integer_mul_div",
+      "title": "Multiplying and Dividing Integers",
+      "strand": "Number Foundations",
+      "difficulty": 2,
+      "prereqs": ["integer_add_sub"],
+      "lesson": "A product or quotient is positive when the signs match and negative when they differ. Division by zero is undefined.",
+      "oer": {
+        "title": "OpenStax Elementary Algebra 2e, 1.4 Multiply and Divide Integers",
+        "url": "https://openstax.org/books/elementary-algebra-2e/pages/1-4-multiply-and-divide-integers"
+      },
+      "family": "integer_ops",
+      "family_mode": "muldiv"
+    },
+    {
+      "id": "fractions_equiv",
+      "title": "Equivalent Fractions",
+      "strand": "Number Foundations",
+      "difficulty": 2,
+      "prereqs": ["number_line"],
+      "lesson": "Multiplying or dividing the numerator and denominator by the same nonzero number keeps a fraction's value. Simplify by removing common factors.",
+      "oer": {
+        "title": "OpenStax Elementary Algebra 2e, 1.5 Visualize Fractions",
+        "url": "https://openstax.org/books/elementary-algebra-2e/pages/1-5-visualize-fractions"
+      },
+      "family": "fraction_ops",
+      "family_mode": "equiv"
+    },
+    {
+      "id": "fraction_add_sub",
+      "title": "Adding and Subtracting Fractions",
+      "strand": "Number Foundations",
+      "difficulty": 3,
+      "prereqs": ["fractions_equiv"],
+      "lesson": "Fractions can be added or subtracted only after they share a denominator. Rewrite each fraction, combine the numerators, then simplify.",
+      "oer": {
+        "title": "OpenStax Elementary Algebra 2e, 1.6 Add and Subtract Fractions",
+        "url": "https://openstax.org/books/elementary-algebra-2e/pages/1-6-add-and-subtract-fractions"
+      },
+      "family": "fraction_ops",
+      "family_mode": "addsub"
+    },
+    {
+      "id": "fraction_mul_div",
+      "title": "Multiplying and Dividing Fractions",
+      "strand": "Number Foundations",
+      "difficulty": 3,
+      "prereqs": ["fractions_equiv"],
+      "lesson": "Multiply fractions across, then simplify. To divide by a fraction, multiply by its reciprocal.",
+      "oer": {
+        "title": "OpenStax Elementary Algebra 2e, 1.5 Visualize Fractions",
+        "url": "https://openstax.org/books/elementary-algebra-2e/pages/1-5-visualize-fractions"
+      },
+      "family": "fraction_ops",
+      "family_mode": "muldiv"
+    },
+    {
+      "id": "decimals_percents",
+      "title": "Decimals and Percents",
+      "strand": "Number Foundations",
+      "difficulty": 2,
+      "prereqs": ["fractions_equiv"],
+      "lesson": "A percent is a fraction out of 100. Move the decimal two places to switch between decimal and percent form.",
+      "oer": {
+        "title": "OpenStax Elementary Algebra 2e, 1.7 Decimals",
+        "url": "https://openstax.org/books/elementary-algebra-2e/pages/1-7-decimals"
+      },
+      "family": "decimal_percent",
+      "family_mode": "convert"
+    },
+    {
+      "id": "order_of_operations",
+      "title": "Order of Operations",
+      "strand": "Order & Proportional Reasoning",
+      "difficulty": 2,
+      "prereqs": ["integer_mul_div", "fraction_add_sub"],
+      "lesson": "Evaluate parentheses first, then exponents, then multiplication and division left to right, then addition and subtraction left to right.",
+      "oer": {
+        "title": "OpenStax Elementary Algebra 2e, 1.1 Introduction to Whole Numbers",
+        "url": "https://openstax.org/books/elementary-algebra-2e/pages/1-1-introduction-to-whole-numbers"
+      },
+      "family": "order_ops",
+      "family_mode": "evaluate"
+    },
+    {
+      "id": "exponents_intro",
+      "title": "Exponents",
+      "strand": "Order & Proportional Reasoning",
+      "difficulty": 3,
+      "prereqs": ["integer_mul_div"],
+      "lesson": "An exponent records repeated multiplication: 2^4 means 2 times itself four times. The base is the repeated factor.",
+      "oer": {
+        "title": "OpenStax Elementary Algebra 2e, 6.2 Use Multiplication Properties of Exponents",
+        "url": "https://openstax.org/books/elementary-algebra-2e/pages/6-2-use-multiplication-properties-of-exponents"
+      },
+      "family": "exponents",
+      "family_mode": "evaluate"
+    },
+    {
+      "id": "square_roots_intro",
+      "title": "Square Roots",
+      "strand": "Order & Proportional Reasoning",
+      "difficulty": 3,
+      "prereqs": ["exponents_intro"],
+      "lesson": "The square root asks which nonnegative number squares to the radicand. Squares and square roots undo each other.",
+      "oer": {
+        "title": "OpenStax Elementary Algebra 2e, 9.1 Simplify and Use Square Roots",
+        "url": "https://openstax.org/books/elementary-algebra-2e/pages/9-1-simplify-and-use-square-roots"
+      },
+      "family": "square_roots",
+      "family_mode": "evaluate"
+    },
+    {
+      "id": "real_number_properties",
+      "title": "Properties of Real Numbers",
+      "strand": "Order & Proportional Reasoning",
+      "difficulty": 2,
+      "prereqs": ["order_of_operations", "fraction_add_sub"],
+      "lesson": "The commutative, associative, identity, inverse, and distributive properties let you rewrite expressions without changing their value.",
+      "oer": {
+        "title": "OpenStax Elementary Algebra 2e, 1.9 Properties of Real Numbers",
+        "url": "https://openstax.org/books/elementary-algebra-2e/pages/1-9-properties-of-real-numbers"
+      },
+      "family": "order_ops",
+      "family_mode": "properties"
+    },
+    {
+      "id": "proportions",
+      "title": "Proportions",
+      "strand": "Order & Proportional Reasoning",
+      "difficulty": 3,
+      "prereqs": ["fractions_equiv", "decimals_percents"],
+      "lesson": "A proportion states that two ratios are equal. Cross products are equal, which turns a proportion into an equation.",
+      "oer": {
+        "title": "OpenStax Elementary Algebra 2e, 8.7 Solve Proportion and Similar Figure Applications",
+        "url": "https://openstax.org/books/elementary-algebra-2e/pages/8-7-solve-proportion-and-similar-figure-applications"
+      },
+      "family": "proportions",
+      "family_mode": "solve"
+    },
+    {
+      "id": "percent_change",
+      "title": "Percent Change",
+      "strand": "Order & Proportional Reasoning",
+      "difficulty": 3,
+      "prereqs": ["decimals_percents", "proportions"],
+      "lesson": "Percent change compares the amount of change with the original amount. Divide the change by the original, then multiply by 100.",
+      "oer": {
+        "title": "OpenStax Elementary Algebra 2e, 3.2 Solve Percent Applications",
+        "url": "https://openstax.org/books/elementary-algebra-2e/pages/3-2-solve-percent-applications"
+      },
+      "family": "decimal_percent",
+      "family_mode": "change"
+    },
+    {
+      "id": "variables_expressions",
+      "title": "Variables and Expressions",
+      "strand": "Expressions",
+      "difficulty": 2,
+      "prereqs": ["integer_add_sub", "order_of_operations"],
+      "lesson": "A variable stands for a number that can change. An algebraic expression combines variables, numbers, and operations without an equals sign.",
+      "oer": {
+        "title": "OpenStax Elementary Algebra 2e, 1.2 Use the Language of Algebra",
+        "url": "https://openstax.org/books/elementary-algebra-2e/pages/1-2-use-the-language-of-algebra"
+      },
+      "family": "evaluate_expression",
+      "family_mode": "identify"
+    },
+    {
+      "id": "evaluate_expressions",
+      "title": "Evaluating Expressions",
+      "strand": "Expressions",
+      "difficulty": 2,
+      "prereqs": ["variables_expressions", "order_of_operations"],
+      "lesson": "To evaluate an expression, substitute the given value for each variable and follow the order of operations.",
+      "oer": {
+        "title": "OpenStax Elementary Algebra 2e, 1.2 Use the Language of Algebra",
+        "url": "https://openstax.org/books/elementary-algebra-2e/pages/1-2-use-the-language-of-algebra"
+      },
+      "family": "evaluate_expression",
+      "family_mode": "evaluate"
+    },
+    {
+      "id": "combine_like_terms",
+      "title": "Combining Like Terms",
+      "strand": "Expressions",
+      "difficulty": 2,
+      "prereqs": ["variables_expressions"],
+      "lesson": "Like terms have the same variable factors and exponents. Combine their coefficients while leaving the variable part unchanged.",
+      "oer": {
+        "title": "OpenStax Elementary Algebra 2e, 6.1 Add and Subtract Polynomials",
+        "url": "https://openstax.org/books/elementary-algebra-2e/pages/6-1-add-and-subtract-polynomials"
+      },
+      "family": "combine_like",
+      "family_mode": "combine"
+    },
+    {
+      "id": "distributive_property",
+      "title": "The Distributive Property",
+      "strand": "Expressions",
+      "difficulty": 3,
+      "prereqs": ["combine_like_terms"],
+      "lesson": "Multiplying a sum multiplies each term inside the parentheses: a(b + c) = ab + ac. Watch the sign of each term.",
+      "oer": {
+        "title": "OpenStax Elementary Algebra 2e, 6.3 Multiply Polynomials",
+        "url": "https://openstax.org/books/elementary-algebra-2e/pages/6-3-multiply-polynomials"
+      },
+      "family": "distribute",
+      "family_mode": "expand"
+    },
+    {
+      "id": "simplify_expressions",
+      "title": "Simplifying Expressions",
+      "strand": "Expressions",
+      "difficulty": 3,
+      "prereqs": ["distributive_property"],
+      "lesson": "Simplify by distributing first, then combining like terms. A simplified expression has no repeated like terms or unnecessary parentheses.",
+      "oer": {
+        "title": "OpenStax Elementary Algebra 2e, 6.1 Add and Subtract Polynomials",
+        "url": "https://openstax.org/books/elementary-algebra-2e/pages/6-1-add-and-subtract-polynomials"
+      },
+      "family": "simplify_expression",
+      "family_mode": "simplify"
+    },
+    {
+      "id": "translate_words",
+      "title": "Translating Words to Algebra",
+      "strand": "Expressions",
+      "difficulty": 3,
+      "prereqs": ["variables_expressions", "order_of_operations"],
+      "lesson": "Words such as sum, difference, product, and quotient signal operations. Define the unknown first, then build the expression piece by piece.",
+      "oer": {
+        "title": "OpenStax Elementary Algebra 2e, 3.1 Use a Problem-Solving Strategy",
+        "url": "https://openstax.org/books/elementary-algebra-2e/pages/3-1-use-a-problem-solving-strategy"
+      },
+      "family": "translate_expression",
+      "family_mode": "translate"
+    },
+    {
+      "id": "one_step_add_sub",
+      "title": "One-Step Equations with Addition",
+      "strand": "Linear Equations & Inequalities",
+      "difficulty": 2,
+      "prereqs": ["integer_add_sub", "variables_expressions"],
+      "lesson": "Undo an added or subtracted constant by applying the inverse operation to both sides of the equation.",
+      "oer": {
+        "title": "OpenStax Elementary Algebra 2e, 2.1 Subtraction and Addition Properties of Equality",
+        "url": "https://openstax.org/books/elementary-algebra-2e/pages/2-1-solve-equations-using-the-subtraction-and-addition-properties-of-equality"
+      },
+      "family": "one_step",
+      "family_mode": "addsub"
+    },
+    {
+      "id": "one_step_mul_div",
+      "title": "One-Step Equations with Multiplication",
+      "strand": "Linear Equations & Inequalities",
+      "difficulty": 2,
+      "prereqs": ["integer_mul_div", "variables_expressions", "fractions_equiv"],
+      "lesson": "Undo multiplication by dividing both sides by the coefficient. Undo division by multiplying both sides by the divisor.",
+      "oer": {
+        "title": "OpenStax Elementary Algebra 2e, 2.2 Division and Multiplication Properties of Equality",
+        "url": "https://openstax.org/books/elementary-algebra-2e/pages/2-2-solve-equations-using-the-division-and-multiplication-properties-of-equality"
+      },
+      "family": "one_step",
+      "family_mode": "muldiv"
+    },
+    {
+      "id": "two_step_equations",
+      "title": "Two-Step Equations",
+      "strand": "Linear Equations & Inequalities",
+      "difficulty": 3,
+      "prereqs": ["one_step_add_sub", "one_step_mul_div"],
+      "lesson": "Solve in reverse order of operations: undo addition or subtraction first, then undo multiplication or division. Keep both sides balanced.",
+      "oer": {
+        "title": "OpenStax Elementary Algebra 2e, 2.4 Use a General Strategy to Solve Linear Equations",
+        "url": "https://openstax.org/books/elementary-algebra-2e/pages/2-4-use-a-general-strategy-to-solve-linear-equations"
+      },
+      "family": "two_step",
+      "family_mode": "solve"
+    },
+    {
+      "id": "variables_both_sides",
+      "title": "Variables on Both Sides",
+      "strand": "Linear Equations & Inequalities",
+      "difficulty": 4,
+      "prereqs": ["two_step_equations", "simplify_expressions"],
+      "lesson": "Collect variable terms on one side and constant terms on the other by adding or subtracting the same quantity from both sides.",
+      "oer": {
+        "title": "OpenStax Elementary Algebra 2e, 2.3 Variables and Constants on Both Sides",
+        "url": "https://openstax.org/books/elementary-algebra-2e/pages/2-3-solve-equations-with-variables-and-constants-on-both-sides"
+      },
+      "family": "both_sides",
+      "family_mode": "solve"
+    },
+    {
+      "id": "clearing_fractions",
+      "title": "Equations with Fractions",
+      "strand": "Linear Equations & Inequalities",
+      "difficulty": 4,
+      "prereqs": ["fraction_mul_div", "two_step_equations"],
+      "lesson": "Multiply every term by the least common denominator to clear fractions, then solve the resulting whole-number equation.",
+      "oer": {
+        "title": "OpenStax Elementary Algebra 2e, 2.5 Solve Equations with Fractions or Decimals",
+        "url": "https://openstax.org/books/elementary-algebra-2e/pages/2-5-solve-equations-with-fractions-or-decimals"
+      },
+      "family": "fraction_equation",
+      "family_mode": "solve"
+    },
+    {
+      "id": "literal_equations",
+      "title": "Literal Equations",
+      "strand": "Linear Equations & Inequalities",
+      "difficulty": 3,
+      "prereqs": ["two_step_equations", "variables_expressions"],
+      "lesson": "A literal equation contains several variables. Isolate the requested variable using the same inverse operations.",
+      "oer": {
+        "title": "OpenStax Elementary Algebra 2e, 2.6 Solve a Formula for a Specific Variable",
+        "url": "https://openstax.org/books/elementary-algebra-2e/pages/2-6-solve-a-formula-for-a-specific-variable"
+      },
+      "family": "literal_equation",
+      "family_mode": "solve"
+    },
+    {
+      "id": "linear_word_problems",
+      "title": "Linear Word Problems",
+      "strand": "Linear Equations & Inequalities",
+      "difficulty": 4,
+      "prereqs": ["two_step_equations", "translate_words"],
+      "lesson": "Translate the situation into an equation, define the unknown, solve, and check that the answer fits the story.",
+      "oer": {
+        "title": "OpenStax Elementary Algebra 2e, 3.1 Use a Problem-Solving Strategy",
+        "url": "https://openstax.org/books/elementary-algebra-2e/pages/3-1-use-a-problem-solving-strategy"
+      },
+      "family": "linear_word",
+      "family_mode": "solve"
+    },
+    {
+      "id": "solve_inequalities",
+      "title": "Solving Linear Inequalities",
+      "strand": "Linear Equations & Inequalities",
+      "difficulty": 3,
+      "prereqs": ["two_step_equations", "integer_mul_div"],
+      "lesson": "Solve inequalities like equations, but reverse the inequality sign when multiplying or dividing both sides by a negative number.",
+      "oer": {
+        "title": "OpenStax Elementary Algebra 2e, 2.7 Solve Linear Inequalities",
+        "url": "https://openstax.org/books/elementary-algebra-2e/pages/2-7-solve-linear-inequalities"
+      },
+      "family": "inequality",
+      "family_mode": "solve"
+    },
+    {
+      "id": "compound_inequalities",
+      "title": "Compound Inequalities",
+      "strand": "Linear Equations & Inequalities",
+      "difficulty": 4,
+      "prereqs": ["solve_inequalities"],
+      "lesson": "A compound inequality joins two conditions with and or or. Apply the same operation to every part, or solve each part separately.",
+      "oer": {
+        "title": "OpenStax Intermediate Algebra 2e, 2.6 Solve Compound Inequalities",
+        "url": "https://openstax.org/books/intermediate-algebra-2e/pages/2-6-solve-compound-inequalities"
+      },
+      "family": "inequality",
+      "family_mode": "compound"
+    },
+    {
+      "id": "absolute_value_equations",
+      "title": "Absolute Value Equations",
+      "strand": "Linear Equations & Inequalities",
+      "difficulty": 4,
+      "prereqs": ["absolute_value", "two_step_equations"],
+      "lesson": "An absolute value equation can split into two cases because the inside expression may be positive or negative. Check each solution.",
+      "oer": {
+        "title": "OpenStax Intermediate Algebra 2e, 2.7 Solve Absolute Value Inequalities",
+        "url": "https://openstax.org/books/intermediate-algebra-2e/pages/2-7-solve-absolute-value-inequalities"
+      },
+      "family": "inequality",
+      "family_mode": "absolute"
+    },
+    {
+      "id": "coordinate_plane",
+      "title": "The Coordinate Plane",
+      "strand": "Graphing & Linear Relations",
+      "difficulty": 2,
+      "prereqs": ["number_line", "integers_compare"],
+      "lesson": "The coordinate plane pairs a horizontal x-value with a vertical y-value. Four quadrants are defined by the signs of those coordinates.",
+      "oer": {
+        "title": "OpenStax Elementary Algebra 2e, 4.1 Use the Rectangular Coordinate System",
+        "url": "https://openstax.org/books/elementary-algebra-2e/pages/4-1-use-the-rectangular-coordinate-system"
+      },
+      "family": "coordinate",
+      "family_mode": "quadrant"
+    },
+    {
+      "id": "plotting_points",
+      "title": "Plotting Points",
+      "strand": "Graphing & Linear Relations",
+      "difficulty": 2,
+      "prereqs": ["coordinate_plane"],
+      "lesson": "Start at the origin, move horizontally by the x-coordinate, then vertically by the y-coordinate. The order of the pair matters.",
+      "oer": {
+        "title": "OpenStax Elementary Algebra 2e, 4.1 Use the Rectangular Coordinate System",
+        "url": "https://openstax.org/books/elementary-algebra-2e/pages/4-1-use-the-rectangular-coordinate-system"
+      },
+      "family": "coordinate",
+      "family_mode": "plot"
+    },
+    {
+      "id": "relations_domain_range",
+      "title": "Domain and Range",
+      "strand": "Graphing & Linear Relations",
+      "difficulty": 3,
+      "prereqs": ["plotting_points"],
+      "lesson": "The domain is the set of input values and the range is the set of output values. List each value once, in order.",
+      "oer": {
+        "title": "OpenStax Intermediate Algebra 2e, 3.5 Relations and Functions",
+        "url": "https://openstax.org/books/intermediate-algebra-2e/pages/3-5-relations-and-functions"
+      },
+      "family": "coordinate",
+      "family_mode": "domain_range"
+    },
+    {
+      "id": "slope",
+      "title": "Slope of a Line",
+      "strand": "Graphing & Linear Relations",
+      "difficulty": 3,
+      "prereqs": ["plotting_points", "integer_mul_div", "fractions_equiv"],
+      "lesson": "Slope is vertical change divided by horizontal change between two points. It measures both steepness and direction.",
+      "oer": {
+        "title": "OpenStax Elementary Algebra 2e, 4.4 Understand Slope of a Line",
+        "url": "https://openstax.org/books/elementary-algebra-2e/pages/4-4-understand-slope-of-a-line"
+      },
+      "family": "slope",
+      "family_mode": "two_points"
+    },
+    {
+      "id": "slope_intercept",
+      "title": "Slope-Intercept Form",
+      "strand": "Graphing & Linear Relations",
+      "difficulty": 3,
+      "prereqs": ["slope", "two_step_equations"],
+      "lesson": "In y = mx + b, m is the slope and b is the y-intercept. This form makes graphing and interpreting a line direct.",
+      "oer": {
+        "title": "OpenStax Elementary Algebra 2e, 4.5 Use the Slope-Intercept Form",
+        "url": "https://openstax.org/books/elementary-algebra-2e/pages/4-5-use-the-slope-intercept-form-of-an-equation-of-a-line"
+      },
+      "family": "line_equation",
+      "family_mode": "slope_intercept"
+    },
+    {
+      "id": "graph_linear_equations",
+      "title": "Graphing Linear Equations",
+      "strand": "Graphing & Linear Relations",
+      "difficulty": 3,
+      "prereqs": ["slope_intercept", "plotting_points"],
+      "lesson": "A linear equation graphs as a straight line. Two points determine the line, and a third point checks the work.",
+      "oer": {
+        "title": "OpenStax Elementary Algebra 2e, 4.2 Graph Linear Equations in Two Variables",
+        "url": "https://openstax.org/books/elementary-algebra-2e/pages/4-2-graph-linear-equations-in-two-variables"
+      },
+      "family": "line_equation",
+      "family_mode": "graph"
+    },
+    {
+      "id": "point_slope",
+      "title": "Point-Slope Form",
+      "strand": "Graphing & Linear Relations",
+      "difficulty": 4,
+      "prereqs": ["slope", "distributive_property"],
+      "lesson": "Point-slope form y - y1 = m(x - x1) builds a line from one point and its slope. Distribute and solve for y to reach slope-intercept form.",
+      "oer": {
+        "title": "OpenStax Elementary Algebra 2e, 4.6 Find the Equation of a Line",
+        "url": "https://openstax.org/books/elementary-algebra-2e/pages/4-6-find-the-equation-of-a-line"
+      },
+      "family": "line_equation",
+      "family_mode": "point_slope"
+    },
+    {
+      "id": "parallel_perpendicular",
+      "title": "Parallel and Perpendicular Lines",
+      "strand": "Graphing & Linear Relations",
+      "difficulty": 4,
+      "prereqs": ["slope_intercept"],
+      "lesson": "Parallel lines share a slope. Perpendicular slopes are negative reciprocals whose product is -1.",
+      "oer": {
+        "title": "OpenStax Intermediate Algebra 2e, 3.3 Find the Equation of a Line",
+        "url": "https://openstax.org/books/intermediate-algebra-2e/pages/3-3-find-the-equation-of-a-line"
+      },
+      "family": "line_equation",
+      "family_mode": "parallel_perp"
+    },
+    {
+      "id": "x_y_intercepts",
+      "title": "x- and y-Intercepts",
+      "strand": "Graphing & Linear Relations",
+      "difficulty": 3,
+      "prereqs": ["graph_linear_equations"],
+      "lesson": "Set y = 0 to find the x-intercept and x = 0 to find the y-intercept. Intercepts are useful graphing anchors.",
+      "oer": {
+        "title": "OpenStax Elementary Algebra 2e, 4.3 Graph with Intercepts",
+        "url": "https://openstax.org/books/elementary-algebra-2e/pages/4-3-graph-with-intercepts"
+      },
+      "family": "line_equation",
+      "family_mode": "intercepts"
+    },
+    {
+      "id": "systems_substitution",
+      "title": "Systems by Substitution",
+      "strand": "Graphing & Linear Relations",
+      "difficulty": 4,
+      "prereqs": ["two_step_equations", "literal_equations", "plotting_points"],
+      "lesson": "Solve one equation for a variable, substitute that expression into the other equation, and solve the resulting single-variable equation.",
+      "oer": {
+        "title": "OpenStax Elementary Algebra 2e, 5.2 Solving Systems by Substitution",
+        "url": "https://openstax.org/books/elementary-algebra-2e/pages/5-2-solving-systems-of-equations-by-substitution"
+      },
+      "family": "systems",
+      "family_mode": "substitution"
+    },
+    {
+      "id": "systems_elimination",
+      "title": "Systems by Elimination",
+      "strand": "Graphing & Linear Relations",
+      "difficulty": 4,
+      "prereqs": ["systems_substitution", "integer_add_sub"],
+      "lesson": "Add or subtract equations to eliminate a variable. Multiply an equation first when the coefficients do not already match.",
+      "oer": {
+        "title": "OpenStax Elementary Algebra 2e, 5.3 Solve Systems by Elimination",
+        "url": "https://openstax.org/books/elementary-algebra-2e/pages/5-3-solve-systems-of-equations-by-elimination"
+      },
+      "family": "systems",
+      "family_mode": "elimination"
+    },
+    {
+      "id": "exponent_product_rule",
+      "title": "Product Rule for Exponents",
+      "strand": "Exponents & Polynomials",
+      "difficulty": 3,
+      "prereqs": ["exponents_intro"],
+      "lesson": "When multiplying powers with the same base, add the exponents: x^a * x^b = x^(a+b).",
+      "oer": {
+        "title": "OpenStax Elementary Algebra 2e, 6.2 Multiplication Properties of Exponents",
+        "url": "https://openstax.org/books/elementary-algebra-2e/pages/6-2-use-multiplication-properties-of-exponents"
+      },
+      "family": "exponents",
+      "family_mode": "product"
+    },
+    {
+      "id": "exponent_quotient_rule",
+      "title": "Quotient Rule for Exponents",
+      "strand": "Exponents & Polynomials",
+      "difficulty": 3,
+      "prereqs": ["exponent_product_rule"],
+      "lesson": "When dividing powers with the same base, subtract the exponents: x^a / x^b = x^(a-b) for x not zero.",
+      "oer": {
+        "title": "OpenStax Elementary Algebra 2e, 6.5 Divide Monomials",
+        "url": "https://openstax.org/books/elementary-algebra-2e/pages/6-5-divide-monomials"
+      },
+      "family": "exponents",
+      "family_mode": "quotient"
+    },
+    {
+      "id": "exponent_power_rule",
+      "title": "Power Rule for Exponents",
+      "strand": "Exponents & Polynomials",
+      "difficulty": 3,
+      "prereqs": ["exponent_product_rule"],
+      "lesson": "A power raised to a power multiplies the exponents: (x^a)^b = x^(ab). Apply the outer exponent to every factor inside.",
+      "oer": {
+        "title": "OpenStax Elementary Algebra 2e, 6.2 Multiplication Properties of Exponents",
+        "url": "https://openstax.org/books/elementary-algebra-2e/pages/6-2-use-multiplication-properties-of-exponents"
+      },
+      "family": "exponents",
+      "family_mode": "power"
+    },
+    {
+      "id": "negative_zero_exponents",
+      "title": "Negative and Zero Exponents",
+      "strand": "Exponents & Polynomials",
+      "difficulty": 4,
+      "prereqs": ["exponent_quotient_rule"],
+      "lesson": "A nonzero base to the zero power is 1. A negative exponent moves the power to the denominator: x^-a = 1/x^a.",
+      "oer": {
+        "title": "OpenStax Elementary Algebra 2e, 6.7 Integer Exponents and Scientific Notation",
+        "url": "https://openstax.org/books/elementary-algebra-2e/pages/6-7-integer-exponents-and-scientific-notation"
+      },
+      "family": "exponents",
+      "family_mode": "negative"
+    },
+    {
+      "id": "scientific_notation",
+      "title": "Scientific Notation",
+      "strand": "Exponents & Polynomials",
+      "difficulty": 4,
+      "prereqs": ["negative_zero_exponents", "decimals_percents"],
+      "lesson": "Scientific notation writes a number as a factor between 1 and 10 times a power of 10. The exponent records the decimal shift.",
+      "oer": {
+        "title": "OpenStax Elementary Algebra 2e, 6.7 Integer Exponents and Scientific Notation",
+        "url": "https://openstax.org/books/elementary-algebra-2e/pages/6-7-integer-exponents-and-scientific-notation"
+      },
+      "family": "exponents",
+      "family_mode": "scientific"
+    },
+    {
+      "id": "polynomial_intro",
+      "title": "Polynomials",
+      "strand": "Exponents & Polynomials",
+      "difficulty": 3,
+      "prereqs": ["exponents_intro", "combine_like_terms"],
+      "lesson": "A polynomial is a sum of monomials with nonnegative integer exponents. Its degree is the largest exponent and its leading coefficient sits on that term.",
+      "oer": {
+        "title": "OpenStax Elementary Algebra 2e, 6.1 Add and Subtract Polynomials",
+        "url": "https://openstax.org/books/elementary-algebra-2e/pages/6-1-add-and-subtract-polynomials"
+      },
+      "family": "combine_like",
+      "family_mode": "identify"
+    },
+    {
+      "id": "add_subtract_polynomials",
+      "title": "Adding and Subtracting Polynomials",
+      "strand": "Exponents & Polynomials",
+      "difficulty": 3,
+      "prereqs": ["polynomial_intro", "simplify_expressions"],
+      "lesson": "Add or subtract polynomials by combining like terms. Distribute a minus sign across every term of the polynomial being subtracted.",
+      "oer": {
+        "title": "OpenStax Elementary Algebra 2e, 6.1 Add and Subtract Polynomials",
+        "url": "https://openstax.org/books/elementary-algebra-2e/pages/6-1-add-and-subtract-polynomials"
+      },
+      "family": "polynomial_ops",
+      "family_mode": "addsub"
+    },
+    {
+      "id": "multiply_monomials",
+      "title": "Multiplying Monomials",
+      "strand": "Exponents & Polynomials",
+      "difficulty": 3,
+      "prereqs": ["polynomial_intro", "exponent_product_rule"],
+      "lesson": "Multiply coefficients and add exponents of matching variable factors. Apply every exponent to each factor inside parentheses.",
+      "oer": {
+        "title": "OpenStax Elementary Algebra 2e, 6.3 Multiply Polynomials",
+        "url": "https://openstax.org/books/elementary-algebra-2e/pages/6-3-multiply-polynomials"
+      },
+      "family": "polynomial_ops",
+      "family_mode": "monomial"
+    },
+    {
+      "id": "multiply_binomials",
+      "title": "Multiplying Binomials",
+      "strand": "Exponents & Polynomials",
+      "difficulty": 4,
+      "prereqs": ["multiply_monomials", "distributive_property"],
+      "lesson": "Every term of the first binomial multiplies every term of the second. Combine like terms after all four products.",
+      "oer": {
+        "title": "OpenStax Elementary Algebra 2e, 6.3 Multiply Polynomials",
+        "url": "https://openstax.org/books/elementary-algebra-2e/pages/6-3-multiply-polynomials"
+      },
+      "family": "polynomial_ops",
+      "family_mode": "binomial"
+    },
+    {
+      "id": "special_products",
+      "title": "Special Products",
+      "strand": "Exponents & Polynomials",
+      "difficulty": 4,
+      "prereqs": ["multiply_binomials"],
+      "lesson": "Squares of binomials follow (a+b)^2 = a^2 + 2ab + b^2, and conjugates follow (a+b)(a-b) = a^2 - b^2.",
+      "oer": {
+        "title": "OpenStax Elementary Algebra 2e, 6.4 Special Products",
+        "url": "https://openstax.org/books/elementary-algebra-2e/pages/6-4-special-products"
+      },
+      "family": "polynomial_ops",
+      "family_mode": "special"
+    },
+    {
+      "id": "gcf_factoring",
+      "title": "Greatest Common Factor",
+      "strand": "Factoring & Quadratics",
+      "difficulty": 3,
+      "prereqs": ["distributive_property", "polynomial_intro"],
+      "lesson": "Factoring reverses distribution. Pull out the greatest common factor of every term first.",
+      "oer": {
+        "title": "OpenStax Elementary Algebra 2e, 7.1 Greatest Common Factor",
+        "url": "https://openstax.org/books/elementary-algebra-2e/pages/7-1-greatest-common-factor-and-factor-by-grouping"
+      },
+      "family": "factoring",
+      "family_mode": "gcf"
+    },
+    {
+      "id": "factor_trinomials",
+      "title": "Factoring Trinomials",
+      "strand": "Factoring & Quadratics",
+      "difficulty": 4,
+      "prereqs": ["multiply_binomials"],
+      "lesson": "Find two numbers whose product is the constant term and whose sum is the middle coefficient. Those numbers form the binomial factors.",
+      "oer": {
+        "title": "OpenStax Elementary Algebra 2e, 7.2 Factor Trinomials of the Form x^2 + bx + c",
+        "url": "https://openstax.org/books/elementary-algebra-2e/pages/7-2-factor-trinomials-of-the-form-x2-bx-c"
+      },
+      "family": "factoring",
+      "family_mode": "trinomial"
+    },
+    {
+      "id": "difference_of_squares",
+      "title": "Difference of Squares",
+      "strand": "Factoring & Quadratics",
+      "difficulty": 4,
+      "prereqs": ["special_products", "gcf_factoring"],
+      "lesson": "A difference of two squares factors as (a+b)(a-b). Check for a common factor before applying the pattern.",
+      "oer": {
+        "title": "OpenStax Elementary Algebra 2e, 7.4 Factor Special Products",
+        "url": "https://openstax.org/books/elementary-algebra-2e/pages/7-4-factor-special-products"
+      },
+      "family": "factoring",
+      "family_mode": "difference_squares"
+    },
+    {
+      "id": "factoring_strategy",
+      "title": "General Factoring Strategy",
+      "strand": "Factoring & Quadratics",
+      "difficulty": 4,
+      "prereqs": ["gcf_factoring", "factor_trinomials", "difference_of_squares"],
+      "lesson": "Always try the greatest common factor first, then count terms and choose a pattern. Keep factoring until every factor is prime.",
+      "oer": {
+        "title": "OpenStax Elementary Algebra 2e, 7.5 General Strategy for Factoring",
+        "url": "https://openstax.org/books/elementary-algebra-2e/pages/7-5-general-strategy-for-factoring-polynomials"
+      },
+      "family": "factoring",
+      "family_mode": "mixed"
+    },
+    {
+      "id": "zero_product_property",
+      "title": "Zero Product Property",
+      "strand": "Factoring & Quadratics",
+      "difficulty": 4,
+      "prereqs": ["factor_trinomials"],
+      "lesson": "If a product equals zero, at least one factor must be zero. This turns a factored equation into two simpler equations.",
+      "oer": {
+        "title": "OpenStax Elementary Algebra 2e, 7.6 Quadratic Equations",
+        "url": "https://openstax.org/books/elementary-algebra-2e/pages/7-6-quadratic-equations"
+      },
+      "family": "quadratic",
+      "family_mode": "zero_product"
+    },
+    {
+      "id": "quadratic_factoring",
+      "title": "Solving Quadratics by Factoring",
+      "strand": "Factoring & Quadratics",
+      "difficulty": 5,
+      "prereqs": ["zero_product_property", "factoring_strategy"],
+      "lesson": "Move every term to one side, factor the quadratic, and set each factor equal to zero. Check each root in the original equation.",
+      "oer": {
+        "title": "OpenStax Elementary Algebra 2e, 7.6 Quadratic Equations",
+        "url": "https://openstax.org/books/elementary-algebra-2e/pages/7-6-quadratic-equations"
+      },
+      "family": "quadratic",
+      "family_mode": "factoring"
+    },
+    {
+      "id": "square_root_property",
+      "title": "The Square Root Property",
+      "strand": "Factoring & Quadratics",
+      "difficulty": 4,
+      "prereqs": ["square_roots_intro", "quadratic_factoring"],
+      "lesson": "If x^2 = k, then x is the positive or negative square root of k. Include both signs when solving.",
+      "oer": {
+        "title": "OpenStax Elementary Algebra 2e, 10.1 The Square Root Property",
+        "url": "https://openstax.org/books/elementary-algebra-2e/pages/10-1-solve-quadratic-equations-using-the-square-root-property"
+      },
+      "family": "quadratic",
+      "family_mode": "sqrt_property"
+    },
+    {
+      "id": "quadratic_formula",
+      "title": "The Quadratic Formula",
+      "strand": "Factoring & Quadratics",
+      "difficulty": 5,
+      "prereqs": ["square_root_property", "quadratic_factoring"],
+      "lesson": "For ax^2 + bx + c = 0, x = (-b +/- sqrt(b^2 - 4ac)) / (2a). The discriminant tells how many real solutions exist.",
+      "oer": {
+        "title": "OpenStax Elementary Algebra 2e, 10.3 The Quadratic Formula",
+        "url": "https://openstax.org/books/elementary-algebra-2e/pages/10-3-solve-quadratic-equations-using-the-quadratic-formula"
+      },
+      "family": "quadratic",
+      "family_mode": "formula"
+    },
+    {
+      "id": "rational_expressions",
+      "title": "Rational Expressions",
+      "strand": "Factoring & Quadratics",
+      "difficulty": 5,
+      "prereqs": ["factor_trinomials", "fraction_mul_div"],
+      "lesson": "A rational expression is a quotient of polynomials. Factor first, then cancel common factors, and note excluded denominator values.",
+      "oer": {
+        "title": "OpenStax Elementary Algebra 2e, 8.1 Simplify Rational Expressions",
+        "url": "https://openstax.org/books/elementary-algebra-2e/pages/8-1-simplify-rational-expressions"
+      },
+      "family": "rational",
+      "family_mode": "evaluate"
+    },
+    {
+      "id": "functions_intro",
+      "title": "Relations and Functions",
+      "strand": "Functions & Models",
+      "difficulty": 3,
+      "prereqs": ["coordinate_plane", "variables_expressions"],
+      "lesson": "A function gives each input exactly one output. A relation that repeats an input with different outputs is not a function.",
+      "oer": {
+        "title": "OpenStax Intermediate Algebra 2e, 3.5 Relations and Functions",
+        "url": "https://openstax.org/books/intermediate-algebra-2e/pages/3-5-relations-and-functions"
+      },
+      "family": "functions",
+      "family_mode": "identify"
+    },
+    {
+      "id": "function_notation",
+      "title": "Function Notation",
+      "strand": "Functions & Models",
+      "difficulty": 3,
+      "prereqs": ["functions_intro", "evaluate_expressions"],
+      "lesson": "f(x) names the output of function f for input x. Evaluate it by substituting the input wherever x appears.",
+      "oer": {
+        "title": "OpenStax Intermediate Algebra 2e, 3.6 Graphs of Functions",
+        "url": "https://openstax.org/books/intermediate-algebra-2e/pages/3-6-graphs-of-functions"
+      },
+      "family": "functions",
+      "family_mode": "evaluate"
+    },
+    {
+      "id": "linear_functions",
+      "title": "Linear Functions",
+      "strand": "Functions & Models",
+      "difficulty": 4,
+      "prereqs": ["function_notation", "slope_intercept"],
+      "lesson": "A linear function has a constant rate of change. Its graph is a line and its equation can be written in slope-intercept form.",
+      "oer": {
+        "title": "OpenStax Intermediate Algebra 2e, 3.6 Graphs of Functions",
+        "url": "https://openstax.org/books/intermediate-algebra-2e/pages/3-6-graphs-of-functions"
+      },
+      "family": "functions",
+      "family_mode": "linear"
+    },
+    {
+      "id": "linear_models",
+      "title": "Linear Models",
+      "strand": "Functions & Models",
+      "difficulty": 4,
+      "prereqs": ["linear_word_problems", "slope_intercept"],
+      "lesson": "A linear model pairs a starting value with a constant rate. Interpret the slope and intercept in the units of the situation.",
+      "oer": {
+        "title": "OpenStax Intermediate Algebra 2e, 3.6 Graphs of Functions",
+        "url": "https://openstax.org/books/intermediate-algebra-2e/pages/3-6-graphs-of-functions"
+      },
+      "family": "functions",
+      "family_mode": "linear_model"
+    },
+    {
+      "id": "quadratic_graphs",
+      "title": "Quadratic Graphs",
+      "strand": "Functions & Models",
+      "difficulty": 5,
+      "prereqs": ["quadratic_factoring", "functions_intro"],
+      "lesson": "A quadratic graph is a parabola. Its vertex is the highest or lowest point, and its axis of symmetry passes through the vertex.",
+      "oer": {
+        "title": "OpenStax Intermediate Algebra 2e, 9.6 Graph Quadratic Functions Using Properties",
+        "url": "https://openstax.org/books/intermediate-algebra-2e/pages/9-6-graph-quadratic-functions-using-properties"
+      },
+      "family": "functions",
+      "family_mode": "quadratic_vertex"
+    },
+    {
+      "id": "exponential_intro",
+      "title": "Exponential Functions",
+      "strand": "Functions & Models",
+      "difficulty": 4,
+      "prereqs": ["exponents_intro", "functions_intro"],
+      "lesson": "An exponential function multiplies by a constant factor for each step. Its graph grows or decays faster than a line.",
+      "oer": {
+        "title": "OpenStax Intermediate Algebra 2e, 10.2 Evaluate and Graph Exponential Functions",
+        "url": "https://openstax.org/books/intermediate-algebra-2e/pages/10-2-evaluate-and-graph-exponential-functions"
+      },
+      "family": "functions",
+      "family_mode": "exponential"
+    },
+    {
+      "id": "sequences_intro",
+      "title": "Sequences",
+      "strand": "Functions & Models",
+      "difficulty": 3,
+      "prereqs": ["functions_intro", "integer_add_sub"],
+      "lesson": "A sequence is an ordered list whose terms follow a rule. An arithmetic sequence adds the same difference each step.",
+      "oer": {
+        "title": "OpenStax Intermediate Algebra 2e, 12.1 Sequences",
+        "url": "https://openstax.org/books/intermediate-algebra-2e/pages/12-1-sequences"
+      },
+      "family": "functions",
+      "family_mode": "sequence"
+    }
+  ]
+}
