@@ -57,6 +57,7 @@ CREATE TABLE IF NOT EXISTS reviews (
     stability REAL NOT NULL,
     difficulty REAL NOT NULL,
     due_at TEXT NOT NULL,
+    last_review TEXT NOT NULL,
     reps INTEGER NOT NULL DEFAULT 0,
     lapses INTEGER NOT NULL DEFAULT 0,
     PRIMARY KEY (learner_id, concept_id)
