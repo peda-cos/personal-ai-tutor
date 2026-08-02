@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Algebra Tutor</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div>
+      <p class="eyebrow">Personal AI Tutor</p>
+      <h1>Algebra Tutor</h1>
+      <p class="subtitle">Ask questions, get scaffolding, keep your reasoning.</p>
+    </div>
+    <nav aria-label="Main sections" class="tabs">
+      <button class="tab active" data-tab="learn" type="button">Learn</button>
+      <button class="tab" data-tab="progress" type="button">Progress</button>
+      <button class="tab" data-tab="study" type="button">Study</button>
+      <button class="tab" data-tab="privacy" type="button">Privacy</button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="learn" class="panel active" aria-labelledby="learn-title">
+      <div class="two-column">
+        <div class="card">
+          <h2 id="learn-title">Start a session</h2>
+          <p class="muted">A demo learner is created locally. Under-13 profiles require the consent checkbox; this is a design demo, not verifiable parental consent.</p>
+          <form id="create-form" class="stack">
+            <label for="display-name">Display name</label>
+            <input id="display-name" name="display_name" maxlength="60" required placeholder="Alex">
+            <label for="age-band">Age band</label>
+            <select id="age-band" name="age_band">
+              <option value="13_17">13-17</option>
+              <option value="under_13">Under 13</option>
+              <option value="18_plus">18+</option>
+            </select>
+            <label class="checkline"><input id="consent" type="checkbox"> Parent/guardian consent for under-13 use</label>
+            <button class="primary" type="submit">Create learner</button>
+          </form>
+          <div id="credentials" class="callout hidden" aria-live="polite">
+            <strong>Save these now.</strong>
+            <p>Learner token and parent key are shown once. They are stored only in this browser session (never on a server log).</p>
+            <label for="learner-token">Learner token</label>
+            <output id="learner-token"></output>
+            <label for="parent-key">Parent key</label>
+            <output id="parent-key"></output>
+            <p class="small">The parent key is required for progress, PDF reports, export, and deletion.</p>
+          </div>
+        </div>
+
+        <div class="card chat-card">
+          <div class="chat-head">
+            <div>
+              <p class="eyebrow">Current focus</p>
+              <h2 id="concept-title">No session yet</h2>
+            </div>
+            <div class="mastery-wrap" aria-live="polite">
+              <span id="mastery-label">Mastery: not started</span>
+              <div class="meter"><span id="mastery-bar"></span></div>
+            </div>
+          </div>
+          <div id="problem" class="problem hidden"></div>
+          <div id="visual"></div>
+          <div id="transcript" class="transcript" aria-live="polite" aria-label="Tutor conversation"></div>
+          <div class="composer">
+            <label class="sr-only" for="answer">Your answer</label>
+            <input id="answer" autocomplete="off" placeholder="Type your reasoning or answer">
+            <button id="send" class="primary" type="button">Send</button>
+          </div>
+          <div class="toolbar">
+            <button id="hint" type="button">I'm stuck</button>
+            <button id="skip" type="button">Next problem</button>
+            <label class="file-button">Photo
+              <input id="photo" type="file" accept="image/png,image/x-portable-graymap">
+            </label>
+            <button id="mic" type="button">Speak</button>
+            <button id="stop-speech" type="button">Stop voice</button>
+          </div>
+          <p id="voice-status" class="small muted" aria-live="polite"></p>
+        </div>
+      </div>
+    </section>
+
+    <section id="progress" class="panel" aria-labelledby="progress-title">
+      <div class="card">
+        <h2 id="progress-title">Parent progress</h2>
+        <p class="muted">Parent access is keyed to one learner. Safety events show categories, never blocked content.</p>
+        <form id="progress-form" class="inline-form">
+          <label for="progress-key">Parent key</label>
+          <input id="progress-key" autocomplete="off" required>
+          <button class="primary" type="submit">Open dashboard</button>
+        </form>
+        <div id="progress-result" class="stack" aria-live="polite"></div>
+        <div class="toolbar" id="progress-actions" hidden>
+          <button id="download-report" type="button">Download weekly PDF</button>
+          <button id="export-data" type="button">Export JSON</button>
+          <button id="delete-data" class="danger" type="button">Delete learner data</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="study" class="panel" aria-labelledby="study-title">
+      <div class="card">
+        <h2 id="study-title">Simulated efficacy study</h2>
+        <p class="muted">10 simulated learners per arm, 30-item pre/post, six sessions over 14 simulated days. This is a reproducible harness, not evidence of human learning gains.</p>
+        <button id="load-study" class="primary" type="button">Load measured simulation</button>
+        <div id="study-result" class="stack" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section id="privacy" class="panel" aria-labelledby="privacy-title">
+      <div class="card">
+        <h2 id="privacy-title">Privacy and retention</h2>
+        <p>This tutor keeps learner interactions, mastery estimates, semantic notes, and safety events scoped to one learner ID. The demo stores learner tokens and parent keys as hashes on the local SQLite database and never stores raw credentials.</p>
+        <ul>
+          <li>Interactions, semantic memory, and safety events: deleted after 365 days.</li>
+          <li>Audit records: deleted after 730 days.</li>
+          <li>Idle sessions: deleted after 30 days. Inactive learners are purged after 365 days.</li>
+          <li>Parents can export or delete all learner data from the Progress tab.</li>
+          <li>Safety events record categories and hashes, not raw self-harm or personal information.</li>
+        </ul>
+        <p class="callout">COPPA-aware design, not a legal compliance certification. The consent checkbox is a demo, not verifiable parental consent. The local tutor is a K-12 portfolio demonstration; a production deployment needs a real consent and access-control layer.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Adaptive algebra tutor. Offline-first: BKT, FSRS-6, Socratic scaffolds, learner-scoped memory, and safety filters.</p>
+  </footer>
+  <script src="/app.js"></script>
+</body>
+</html>
