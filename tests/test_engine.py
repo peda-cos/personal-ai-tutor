@@ -29,11 +29,13 @@ def test_text_demo_flow(engine, learner) -> None:
 
 def test_photo_turn_recognizes_equation(engine, learner) -> None:
     turn = engine.start_session(learner.scope)
+    before = engine.store.interaction_count(learner.scope)
     photo = render_png("3x+6=12")
     result = engine.photo_turn(learner.scope, turn.session_id, photo)
     assert result.concept_id == "two_step_equations"
     assert "3x+6=12" in result.item_prompt
     assert result.message.endswith("?")
+    assert engine.store.interaction_count(learner.scope) == before + 1
 
 
 def test_photo_turn_rejects_garbage(engine, learner) -> None:

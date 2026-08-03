@@ -4,9 +4,9 @@ from __future__ import annotations
 
 import re
 import secrets
+from collections.abc import Callable, Sequence
 from dataclasses import dataclass, replace
 from datetime import datetime
-from typing import Callable, Sequence
 
 from . import fsrs
 from .algebra import check_answer
@@ -14,13 +14,12 @@ from .bkt import BktParams, default_params
 from .config import Settings
 from .curriculum import Concept, Curriculum
 from .db import Clock, SystemClock
-from .items import ItemFactory, ItemError
+from .items import ItemError, ItemFactory
 from .llm import ClaudeScaffolder
 from .memory import MemoryService
 from .photo import HttpVlmOcr, ImageError, SyntheticOcr, decode_image
 from .policy import PolicyContext, PolicyDecision, SocraticPolicy
 from .safety import LlamaGuard, ProviderError, SafetyService, SafetyVerdict
-from .voice import build_tts
 from .store import (
     Credentials,
     LearnerScope,
@@ -32,6 +31,7 @@ from .store import (
     authenticate_parent,
     create_learner,
 )
+from .voice import build_tts
 
 
 class SessionNotFound(LookupError):
@@ -93,6 +93,7 @@ class TutorEngine:
         self.clock = clock or SystemClock()
         self.store = Store(self.settings.db_path, self.clock)
         self.memory = MemoryService(self.store)
+        self.memory.purge_expired()
         guard = None
         if self.settings.guard in {"llama_guard", "both"}:
             if not self.settings.guard_url:
@@ -402,7 +403,10 @@ class TutorEngine:
                 current_id=concept.id,
             )
             next_index = 0
-        elif decision.item_solved and (decision.mastery_after or 0.0) >= self.settings.mastery_target:
+        elif (
+            decision.item_solved
+            and (decision.mastery_after or 0.0) >= self.settings.mastery_target
+        ):
             next_concept = self.policy.select_concept(
                 mastery,
                 due_concepts=self._due_concepts(scope, self.clock.now()),
@@ -456,7 +460,12 @@ class TutorEngine:
         try:
             item = self.factory.build_from_equation(equation)
         except (ItemError, ValueError):
-            return self.reply(scope, session.id, "I couldn't read that equation. Can you type it again?", modality)
+            return self.reply(
+                scope,
+                session.id,
+                "I couldn't read that equation. Can you type it again?",
+                modality,
+            )
         concept = self.curriculum.concepts[item.concept_id]
         updated = Session(
             id=session.id,
@@ -474,14 +483,26 @@ class TutorEngine:
             updated_at=self.clock.now(),
         )
         self.store.save_session(scope, updated)
-        message = (
-            f"Let's look at {item.prompt.rstrip('.')}. {item.steps[0].question}"
-        )
+        message = f"Let's look at {item.prompt.rstrip('.')}. {item.steps[0].question}"
         if verdict.response:
             message = f"{verdict.response} {message}"
         output = self.safety.check_output(scope, message)
         if not output.allowed:
             message = output.response or message
+        self.memory.record_interaction(
+            scope,
+            session_id=updated.id,
+            modality=modality,
+            learner_text=equation,
+            tutor_text=message,
+            concept_id=concept.id,
+            signal="problem",
+            correct=False,
+            step_index=0,
+            hints_used=0,
+            mastery_after=None,
+            safety_category=verdict.category,
+        )
         return self._turn_for(
             updated,
             message,
@@ -518,7 +539,9 @@ class TutorEngine:
                 solved=False,
                 safety_blocked=True,
             )
-        return self._start_problem(scope, session, result.text, "photo", verdict)
+        return self._start_problem(
+            scope, session, verdict.redacted_text, "photo", verdict
+        )
 
     def voice_turn(
         self,
@@ -613,9 +636,8 @@ class TutorEngine:
         mastery_before: float | None = None,
     ) -> Turn:
         concept = self.curriculum.concepts[session.concept_id]
-        row = self.store.mastery_row(
-            LearnerScope(session.learner_id, ""), concept.id
-        )
+        row = self.store.mastery_row(LearnerScope(session.learner_id, ""), concept.id)
+        step_index = min(session.step_index, len(session.item.steps) - 1)
         return Turn(
             session_id=session.id,
             message=message,
@@ -623,7 +645,7 @@ class TutorEngine:
             concept_title=concept.title,
             item_prompt=session.item.prompt,
             visual=session.item.visual,
-            step_question=session.item.steps[min(session.step_index, len(session.item.steps) - 1)].question,
+            step_question=session.item.steps[step_index].question,
             mastery_before=mastery_before,
             mastery_after=row.p if row is not None else None,
             signal=signal,
