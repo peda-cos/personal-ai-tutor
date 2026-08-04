@@ -3,8 +3,9 @@
 from __future__ import annotations
 
 import re
+from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
-from typing import Mapping, Sequence, TypedDict
+from typing import TypedDict
 
 from langgraph.graph import END, START, StateGraph
 
@@ -255,10 +256,7 @@ class SocraticPolicy:
         concept = state["concept"]
         if signal == "correct":
             if state.get("item_solved"):
-                response = (
-                    f"You've got it: {item.final_answer}. "
-                    f"That is the solution to {item.prompt.rstrip('.')}."
-                )
+                response = f"You've got it: {item.final_answer}. That is correct."
                 return {"response": response}
             next_step = item.steps[step_index + 1]
             return {

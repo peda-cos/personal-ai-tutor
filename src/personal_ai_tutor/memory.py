@@ -61,26 +61,25 @@ class MemoryService:
             safety_category=safety_category,
         )
         if concept_id is not None:
-            self._promote(scope, concept_id, correct, modality)
+            self._promote(scope, concept_id, signal, modality)
 
     def _promote(
-        self, scope: LearnerScope, concept_id: str, correct: bool, modality: str
+        self, scope: LearnerScope, concept_id: str, signal: str, modality: str
     ) -> None:
-        mistakes = self.store.count_interactions(
-            scope, concept_id=concept_id, correct=False
-        )
-        if mistakes >= 3:
-            self.store.upsert_semantic(
-                scope,
-                f"mistake:{concept_id}",
-                "needs more practice",
-                min(0.9, 0.5 + 0.1 * mistakes),
+        if signal == "incorrect":
+            mistakes = self.store.count_interactions(
+                scope, concept_id=concept_id, signal="incorrect"
             )
+            if mistakes >= 3:
+                self.store.upsert_semantic(
+                    scope,
+                    f"mistake:{concept_id}",
+                    "needs more practice",
+                    min(0.9, 0.5 + 0.1 * mistakes),
+                )
         modality_count = self.store.count_interactions(scope, modality=modality)
         if modality in {"voice", "photo"} and modality_count >= 3:
-            self.store.upsert_semantic(
-                scope, "preferred_modality", modality, 0.6
-            )
+            self.store.upsert_semantic(scope, "preferred_modality", modality, 0.6)
 
     def profile(self, scope: LearnerScope, recent_limit: int = 5) -> MemoryProfile:
         return MemoryProfile(

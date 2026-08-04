@@ -131,6 +131,32 @@ def test_export_excludes_secrets_and_delete_cascades(
     assert store.mastery_map(scope_b)["number_line"] == pytest.approx(0.9)
 
 
+def test_export_includes_all_interactions_not_only_recent(
+    store: Store,
+) -> None:
+    from personal_ai_tutor.store import authenticate_learner, authenticate_parent
+
+    credentials = create_learner(store, "Full Export", "13_17", True)
+    scope = authenticate_learner(store, credentials.learner_token)
+    parent = authenticate_parent(store, credentials.parent_key)
+    for index in range(101):
+        store.add_interaction(
+            scope,
+            session_id="s",
+            modality="text",
+            learner_text=f"attempt {index}",
+            tutor_text="question",
+            concept_id="number_line",
+            signal="incorrect",
+            correct=False,
+            step_index=0,
+            hints_used=0,
+            mastery_after=None,
+        )
+    payload = store.export(parent)
+    assert len(payload["interactions"]) == 101
+
+
 def test_purge_old_rows_and_inactive_learners(
     store: Store, clock: FrozenClock
 ) -> None:

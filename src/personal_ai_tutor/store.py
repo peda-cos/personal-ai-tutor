@@ -7,11 +7,12 @@ import hmac
 import json
 import secrets
 import sqlite3
+from collections.abc import Iterator
 from contextlib import contextmanager
 from dataclasses import dataclass
 from datetime import datetime, timedelta
 from pathlib import Path
-from typing import Any, Iterator
+from typing import Any
 
 from .db import Clock, SystemClock, connect, from_iso, init_schema, to_iso
 from .fsrs import ReviewState
@@ -498,6 +499,7 @@ class Store:
         concept_id: str | None = None,
         correct: bool | None = None,
         modality: str | None = None,
+        signal: str | None = None,
     ) -> int:
         clauses = ["learner_id = ?"]
         params: list[object] = [scope.learner_id]
@@ -510,6 +512,9 @@ class Store:
         if modality is not None:
             clauses.append("modality = ?")
             params.append(modality)
+        if signal is not None:
+            clauses.append("signal = ?")
+            params.append(signal)
         sql = "SELECT COUNT(*) AS n FROM interactions WHERE " + " AND ".join(clauses)
         with self.connection() as conn:
             row = conn.execute(sql, tuple(params)).fetchone()
@@ -694,7 +699,7 @@ class Store:
                     "correct": item.correct,
                     "mastery_after": item.mastery_after,
                 }
-                for item in self.recent_interactions(scope, 100)
+                for item in self.all_interactions(scope, 10000)
             ],
             "semantic": [
                 {
@@ -749,7 +754,14 @@ class Store:
         audit_cutoff = to_iso(current - timedelta(days=730))
         session_cutoff = to_iso(current - timedelta(days=30))
         learner_cutoff = to_iso(current - timedelta(days=365))
-        counts = {"interactions": 0, "semantic": 0, "safety_events": 0, "audit": 0, "sessions": 0, "learners": 0}
+        counts = {
+            "interactions": 0,
+            "semantic": 0,
+            "safety_events": 0,
+            "audit": 0,
+            "sessions": 0,
+            "learners": 0,
+        }
         with self.connection() as conn:
             counts["interactions"] = conn.execute(
                 "DELETE FROM interactions WHERE ts < ?", (interaction_cutoff,)

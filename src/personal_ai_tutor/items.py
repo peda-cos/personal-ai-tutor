@@ -9,9 +9,9 @@ from __future__ import annotations
 
 import hashlib
 import random
+from collections.abc import Callable, Mapping, Sequence
 from dataclasses import dataclass
 from fractions import Fraction
-from typing import Callable, Mapping, Sequence
 
 from .algebra import describe_equation, parse_equation, solve_linear
 from .curriculum import Concept, Curriculum
@@ -239,7 +239,8 @@ class ItemFactory:
                     ),
                 ),
                 _step(
-                    "After moving the x terms left and the constants right, what constant is on the right?",
+                    "After moving the x terms left and the constants right, "
+                    "what constant is on the right?",
                     _text(new_constant),
                     _generic_hints("constant"),
                 ),
@@ -397,7 +398,7 @@ def _fraction_ops(concept: Concept, variant: int, rng: random.Random) -> Item:
             f"Simplify {numerator * factor}/{denominator * factor}.",
             (
                 _step(
-                    "What common factor can you divide out of the numerator and denominator?",
+                    "What is the fraction in lowest terms?",
                     _text(value),
                     (
                         "Look for a factor shared by both numbers.",
@@ -420,7 +421,7 @@ def _fraction_ops(concept: Concept, variant: int, rng: random.Random) -> Item:
             f"Evaluate {numerator}/{denominator} + {other_numerator}/{other_denominator}.",
             (
                 _step(
-                    "What common denominator will you use?",
+                    "What is the sum in lowest terms?",
                     _text(value),
                     (
                         "Find a common denominator first.",
@@ -497,10 +498,12 @@ def _decimal_percent(concept: Concept, variant: int, rng: random.Random) -> Item
 
 
 def _order_ops(concept: Concept, variant: int, rng: random.Random) -> Item:
-    a = rng.randint(1, 9)
+    a = rng.randint(2, 9)
     b = rng.randint(1, 9)
     c = rng.randint(1, 9)
     if concept.family_mode == "properties":
+        if a == 2 and b == 2:
+            b = 3
         options = (f"{a}x + {a * b}", f"{a}x + {b}", f"{a + b}x", f"{a}x + {a + b}")
         answer = f"{a}x + {a * b}"
         return Item(
@@ -693,7 +696,7 @@ def _proportions(concept: Concept, variant: int, rng: random.Random) -> Item:
         (
             _step(
                 "What number is missing so the two ratios are equal?",
-                str(missing),
+                str(b),
                 (
                     "Cross multiply the two ratios.",
                     "Compare the denominators to find the scale factor.",
@@ -761,7 +764,7 @@ def _combine_like(concept: Concept, variant: int, rng: random.Random) -> Item:
         f"Simplify {a}x + {b}x - {c}.",
         (
             _step(
-                "Which terms are like terms, and what is their combined coefficient?",
+                "After combining like terms, what is the simplified expression?",
                 f"{a + b}x - {c}",
                 (
                     "Add the coefficients of the x terms.",
@@ -1006,7 +1009,7 @@ def _linear_word(concept: Concept, variant: int, rng: random.Random) -> Item:
         f"A taxi charges ${base} plus ${rate} per kilometre. What is the cost for {distance} km?",
         (
             _step(
-                "Which expression models the cost, and what is its value here?",
+                "What is the total cost for this trip?",
                 str(base + rate * distance),
                 (
                     "The base fee is paid once.",
@@ -1125,7 +1128,8 @@ def _coordinate(concept: Concept, variant: int, rng: random.Random) -> Item:
         return Item(
             concept.id,
             variant,
-            f"Point A is {abs(x)} units {direction} and {abs(y)} units {vertical} from the origin. What are its coordinates?",
+            f"Point A is {abs(x)} units {direction} and {abs(y)} units {vertical} "
+            "from the origin. What are its coordinates?",
             (
                 _step(
                     "Which ordered pair records the horizontal and vertical moves?",
@@ -1211,7 +1215,7 @@ def _line_equation(concept: Concept, variant: int, rng: random.Random) -> Item:
         return Item(
             concept.id,
             variant,
-            f"In y = {m}x + ({b}), what is the slope?",
+            f"Find the slope and y-intercept of y = {m}x + ({b}).",
             (
                 _step("Which number multiplies x?", str(m), _generic_hints("x coefficient")),
                 _step("What is the y-intercept?", str(b), _generic_hints("constant")),
@@ -1235,12 +1239,12 @@ def _line_equation(concept: Concept, variant: int, rng: random.Random) -> Item:
                     ),
                 ),
             ),
-            _visual([(x, answer)]),
+            _visual([(x, answer)]) if -5 <= x <= 5 and -5 <= answer <= 5 else None,
         )
     if concept.family_mode == "point_slope":
         x1, y1 = rng.randint(-3, 3), rng.randint(-5, 5)
         x2, y2 = x1 + 1, y1 + m
-        print_statements = f"y = {m}x + ({y2 - m * x2})"
+        slope_intercept_form = f"y = {m}x + ({y2 - m * x2})"
         return Item(
             concept.id,
             variant,
@@ -1248,7 +1252,7 @@ def _line_equation(concept: Concept, variant: int, rng: random.Random) -> Item:
             (
                 _step(
                     "Use y - y1 = m(x - x1); what is the slope-intercept form?",
-                    print_statements,
+                    slope_intercept_form,
                     (
                         "Start with point-slope form.",
                         "Distribute the slope.",
@@ -1518,7 +1522,6 @@ def _factoring(concept: Concept, variant: int, rng: random.Random) -> Item:
         )
     a = rng.randint(1, 5)
     b = rng.randint(1, 5)
-    answer = f"{{{-a}, {-b}}}"
     return Item(
         concept.id,
         variant,
@@ -1591,6 +1594,8 @@ def _quadratic(concept: Concept, variant: int, rng: random.Random) -> Item:
     if concept.family_mode == "formula":
         r1 = rng.randint(1, 4)
         r2 = rng.randint(1, 4)
+        while r2 == r1:
+            r2 = rng.randint(1, 4)
         b = -(r1 + r2)
         c = r1 * r2
         disc = b * b - 4 * c
@@ -1693,7 +1698,7 @@ def _functions(concept: Concept, variant: int, rng: random.Random) -> Item:
         return Item(
             concept.id,
             variant,
-            f"What is the vertex of y = x^2 - {2 * h}x + {h * h + k}?",
+            f"What is the vertex of y = x^2 {_signed(-2 * h)}x {_signed(h * h + k)}?",
             (
                 _step(
                     "What is the x-coordinate of the vertex?",
@@ -1737,7 +1742,7 @@ def _functions(concept: Concept, variant: int, rng: random.Random) -> Item:
             "What is the next term in the arithmetic sequence " + ", ".join(map(str, terms)) + "?",
             (
                 _step(
-                    "What constant difference is added each time?",
+                    "What is the next term?",
                     str(terms[-1] + diff),
                     (
                         "Subtract consecutive terms.",

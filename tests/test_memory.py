@@ -32,6 +32,16 @@ def test_mistake_promotion_and_note(engine, learner) -> None:
     assert "scaffold" in (memory.note_for(learner.scope, "two_step_equations") or "")
 
 
+def test_help_and_problem_intake_do_not_count_as_mistakes(engine, learner) -> None:
+    turn = engine.start_session(learner.scope)
+    for _ in range(3):
+        engine.reply(learner.scope, turn.session_id, "3x+6=12")
+    for _ in range(3):
+        engine.reply(learner.scope, turn.session_id, "I'm stuck")
+    facts = engine.store.semantic_map(learner.scope)
+    assert not any(key.startswith("mistake:") for key in facts)
+
+
 def test_modality_preference(engine, learner) -> None:
     memory = engine.memory
     for _ in range(3):

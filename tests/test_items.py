@@ -1,5 +1,8 @@
 from __future__ import annotations
 
+import re
+from fractions import Fraction
+
 import pytest
 
 from personal_ai_tutor.algebra import check_answer
@@ -63,3 +66,45 @@ def test_equation_intake_steps(factory: ItemFactory) -> None:
 def test_unknown_concept_is_explicit(factory: ItemFactory) -> None:
     with pytest.raises(ItemError):
         factory.build("not_a_concept", 0)
+
+
+def test_proportion_answers_solve_the_prompt(factory: ItemFactory) -> None:
+    for variant in range(10):
+        item = factory.build("proportions", variant)
+        match = re.fullmatch(r"Solve n/(\d+) = (\d+)/(\d+)\.", item.prompt)
+        assert match is not None
+        numerator_scale, missing, denominator_scale = map(int, match.groups())
+        assert Fraction(item.final_answer) == Fraction(
+            missing * numerator_scale, denominator_scale
+        )
+
+
+def test_one_step_division_answers_solve_the_prompt(factory: ItemFactory) -> None:
+    for variant in range(10):
+        item = factory.build("one_step_mul_div", variant)
+        division = re.fullmatch(r"Solve x/(\d+) = (\d+)\.", item.prompt)
+        if division is not None:
+            divisor, value = map(int, division.groups())
+            assert Fraction(item.final_answer) == divisor * value
+            continue
+        multiplication = re.fullmatch(r"Solve (\d+)x = (\d+)\.", item.prompt)
+        assert multiplication is not None
+        coefficient, product = map(int, multiplication.groups())
+        assert Fraction(item.final_answer) == Fraction(product, coefficient)
+
+
+def test_quadratic_formula_roots_are_distinct(factory: ItemFactory) -> None:
+    for variant in range(20):
+        item = factory.build("quadratic_formula", variant)
+        roots = re.findall(r"-?\d+", item.final_answer)
+        assert len(roots) == 2
+        assert roots[0] != roots[1]
+
+
+def test_choice_options_are_unique(factory: ItemFactory, curriculum: Curriculum) -> None:
+    for concept_id in curriculum.concepts:
+        for variant in range(5):
+            item = factory.build(concept_id, variant)
+            for step in item.steps:
+                if step.options is not None:
+                    assert len(step.options) == len(set(step.options))
