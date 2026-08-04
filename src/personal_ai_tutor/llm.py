@@ -5,10 +5,9 @@ from __future__ import annotations
 import json
 import re
 import urllib.request
-from typing import Callable
+from collections.abc import Callable
 
 from .safety import ProviderError
-
 
 Transport = Callable[[str, dict[str, str], bytes, float], bytes]
 
@@ -89,13 +88,14 @@ def _valid_scaffold(text: str, final_answer: str) -> bool:
         return False
     lowered = text.lower()
     final = final_answer.strip().lower()
-    if final and (
-        f"answer is {final}" in lowered
-        or f"x = {final}" in lowered
-        or re.search(rf"\b{re.escape(final)}\b\s*$", lowered)
-    ):
-        return False
-    return True
+    return not (
+        final
+        and (
+            f"answer is {final}" in lowered
+            or f"x = {final}" in lowered
+            or re.search(rf"\b{re.escape(final)}\b\s*$", lowered)
+        )
+    )
 
 
 def _urllib_post(url: str, headers: dict[str, str], body: bytes, timeout: float) -> bytes:

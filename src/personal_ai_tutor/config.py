@@ -18,16 +18,6 @@ OcrMode = Literal["synthetic", "http"]
 GuardMode = Literal["rules", "llama_guard", "both"]
 
 
-def _env_int(name: str, default: int) -> int:
-    raw = os.environ.get(name)
-    if raw is None or raw == "":
-        return default
-    try:
-        return int(raw)
-    except ValueError as exc:
-        raise ValueError(f"{name} must be an integer") from exc
-
-
 def _env_bool(name: str, default: bool) -> bool:
     raw = os.environ.get(name)
     if raw is None or raw == "":
@@ -38,9 +28,6 @@ def _env_bool(name: str, default: bool) -> bool:
 @dataclass(frozen=True)
 class Settings:
     db_path: Path = Path("var/tutor.db")
-    retention_days: int = 365
-    audit_retention_days: int = 730
-    session_idle_days: int = 30
     mastery_target: float = 0.80
     prereq_threshold: float = 0.70
     llm: LlmMode = "off"
@@ -82,9 +69,6 @@ class Settings:
             raise ValueError("TUTOR_GUARD must be rules, llama_guard, or both")
         return cls(
             db_path=Path(os.environ.get("TUTOR_DB", "var/tutor.db")),
-            retention_days=_env_int("TUTOR_RETENTION_DAYS", 365),
-            audit_retention_days=_env_int("TUTOR_AUDIT_RETENTION_DAYS", 730),
-            session_idle_days=_env_int("TUTOR_SESSION_IDLE_DAYS", 30),
             mastery_target=float(os.environ.get("TUTOR_MASTERY_TARGET", "0.80")),
             prereq_threshold=float(os.environ.get("TUTOR_PREREQ_THRESHOLD", "0.70")),
             llm=llm,  # type: ignore[arg-type]

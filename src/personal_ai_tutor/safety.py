@@ -5,9 +5,9 @@ from __future__ import annotations
 import json
 import re
 import urllib.request
+from collections.abc import Callable
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Callable
 
 from .store import LearnerScope, Store
 
@@ -130,7 +130,8 @@ _UNSAFE_RULES: dict[str, tuple[re.Pattern[str], ...]] = {
         re.compile(pattern, re.I)
         for pattern in (
             r"\bhate\s+all\s+(?:jews|muslims|blacks|asians|gays|trans people|immigrants)\b",
-            r"\b(?:jews|muslims|blacks|asians|gays|trans people|immigrants)\s+are\s+(?:stupid|inferior)\b",
+            r"\b(?:jews|muslims|blacks|asians|gays|trans people|immigrants)\s+"
+            r"are\s+(?:stupid|inferior)\b",
         )
     ),
     "jailbreak": tuple(

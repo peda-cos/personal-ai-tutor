@@ -7,7 +7,6 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Protocol
 
-
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS learners (
     id TEXT PRIMARY KEY,

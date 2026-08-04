@@ -9,9 +9,9 @@ from __future__ import annotations
 
 import math
 import re
+from collections.abc import Iterable, Sequence
 from dataclasses import dataclass
 from fractions import Fraction
-from typing import Iterable, Sequence
 
 
 class AnswerParseError(ValueError):
@@ -174,13 +174,12 @@ class Interval:
     hi_closed: bool
 
     def contains(self, value: Fraction) -> bool:
-        if self.lo is not None:
-            if value < self.lo or (value == self.lo and not self.lo_closed):
-                return False
-        if self.hi is not None:
-            if value > self.hi or (value == self.hi and not self.hi_closed):
-                return False
-        return True
+        return not (
+            self.lo is not None
+            and (value < self.lo or (value == self.lo and not self.lo_closed))
+            or self.hi is not None
+            and (value > self.hi or (value == self.hi and not self.hi_closed))
+        )
 
 
 def normalize(text: str) -> str:
@@ -522,7 +521,9 @@ def _intersect(intervals: Sequence[Interval]) -> Interval:
             lo, lo_closed = interval.lo, interval.lo_closed
         if interval.hi is not None and (hi is None or interval.hi < hi):
             hi, hi_closed = interval.hi, interval.hi_closed
-        if lo is not None and hi is not None and (lo > hi or (lo == hi and not (lo_closed and hi_closed))):
+        if lo is not None and hi is not None and (
+            lo > hi or (lo == hi and not (lo_closed and hi_closed))
+        ):
             raise AnswerParseError("intersection is empty")
     return Interval(lo, lo_closed, hi, hi_closed)
 
@@ -555,16 +556,22 @@ def _intervals_equal(left: Sequence[Interval], right: Sequence[Interval]) -> boo
     if len(left) != len(right):
         return False
     for a, b in zip(left, right, strict=True):
-        if a.lo is None and b.lo is not None or a.lo is not None and b.lo is None:
+        if (a.lo is None) != (b.lo is None):
             return False
-        if a.lo is not None and b.lo is not None:
-            if not _close(a.lo, b.lo) or a.lo_closed != b.lo_closed:
-                return False
-        if a.hi is None and b.hi is not None or a.hi is not None and b.hi is None:
+        if (
+            a.lo is not None
+            and b.lo is not None
+            and (not _close(a.lo, b.lo) or a.lo_closed != b.lo_closed)
+        ):
             return False
-        if a.hi is not None and b.hi is not None:
-            if not _close(a.hi, b.hi) or a.hi_closed != b.hi_closed:
-                return False
+        if (a.hi is None) != (b.hi is None):
+            return False
+        if (
+            a.hi is not None
+            and b.hi is not None
+            and (not _close(a.hi, b.hi) or a.hi_closed != b.hi_closed)
+        ):
+            return False
     return True
 
 

@@ -3,9 +3,10 @@
 from __future__ import annotations
 
 import json
+from collections.abc import Mapping
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Mapping
+from typing import Any
 
 
 class CurriculumError(ValueError):
@@ -181,23 +182,19 @@ class Curriculum:
         ]
         for concept in self.concepts.values():
             lines.append(
-                "MERGE (c:Concept {id: '%s'}) SET c.title = '%s', c.strand = '%s', "
-                "c.difficulty = %d, c.lesson = '%s', c.oer = '%s';"
-                % (
-                    _cypher_escape(concept.id),
-                    _cypher_escape(concept.title),
-                    _cypher_escape(concept.strand),
-                    concept.difficulty,
-                    _cypher_escape(concept.lesson),
-                    _cypher_escape(concept.oer.url),
-                )
+                f"MERGE (c:Concept {{id: '{_cypher_escape(concept.id)}'}}) "
+                f"SET c.title = '{_cypher_escape(concept.title)}', "
+                f"c.strand = '{_cypher_escape(concept.strand)}', "
+                f"c.difficulty = {concept.difficulty}, "
+                f"c.lesson = '{_cypher_escape(concept.lesson)}', "
+                f"c.oer = '{_cypher_escape(concept.oer.url)}';"
             )
         for concept in self.concepts.values():
             for prereq in concept.prereqs:
                 lines.append(
-                    "MATCH (a:Concept {id: '%s'}), (b:Concept {id: '%s'}) "
+                    f"MATCH (a:Concept {{id: '{_cypher_escape(prereq)}'}}), "
+                    f"(b:Concept {{id: '{_cypher_escape(concept.id)}'}}) "
                     "MERGE (a)-[:PREREQ]->(b);"
-                    % (_cypher_escape(prereq), _cypher_escape(concept.id))
                 )
         return "\n".join(lines) + "\n"
 
