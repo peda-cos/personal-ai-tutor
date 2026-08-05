@@ -76,7 +76,7 @@ credential flow, not a production identity system.
 |---|---|---|---|
 | Tutor policy | Deterministic Socratic templates + LangGraph | Claude Messages API scaffold rewrite with prompt caching | `TUTOR_LLM=claude`, `ANTHROPIC_API_KEY`, `TUTOR_CLAUDE_MODEL` |
 | Curriculum graph | In-process DAG + SQLite persistence | Neo4j import from generated Cypher | `export-cypher`, then `cypher-shell -f curriculum.cypher` |
-| ASR | Scripted fixtures / browser speech recognition | whisper.cpp CLI (`whisper-cli -m … -f … -oj`) | `TUTOR_ASR=whisper`, `WHISPER_BIN`, `WHISPER_MODEL` |
+| ASR | Scripted fixtures / typed transcript fallback | whisper.cpp CLI (`whisper-cli -m … -f … -oj`) | `TUTOR_ASR=whisper`, `WHISPER_BIN`, `WHISPER_MODEL` |
 | TTS | Deterministic tone WAV (not speech) | Cartesia `/tts/bytes` (current Sonic model) | `TUTOR_TTS=cartesia`, `CARTESIA_API_KEY`, `CARTESIA_VOICE_ID`, `CARTESIA_MODEL` |
 | Photo OCR | Built-in clean-render OCR (PNG/PGM) | OpenAI-compatible VLM endpoint (dots.mocr or PaliGemma serving) | `TUTOR_OCR=http`, `TUTOR_OCR_URL`, `TUTOR_OCR_MODEL`, `TUTOR_OCR_API_KEY` |
 | Safety | Age-appropriate rules + PII redaction + output guard | Llama Guard 4 classifier over an OpenAI-compatible endpoint | `TUTOR_GUARD=llama_guard`, `TUTOR_GUARD_URL`, `TUTOR_GUARD_MODEL` |
@@ -206,8 +206,9 @@ covered with an injected transport in tests; model weights were not run locally.
 - **Voice:** a transport-agnostic event loop with partial/final speech events and explicit
   barge-in; `ToneTts` produces deterministic WAV chunks, `whisper.cpp` is the ASR adapter, and
   Cartesia is the real TTS adapter. The browser uses SpeechRecognition/SpeechSynthesis when
-  available and falls back to typed transcripts. Cross-learner voice re-ingestion is rejected
-  on speaker-label mismatch, audited, and surfaced as a safety event.
+  available and falls back to typed transcripts; browser speech recognition may use the
+  browser vendor's network service, so `whisper.cpp` is the local ASR path. Cross-learner voice
+  re-ingestion is rejected on speaker-label mismatch, audited, and surfaced as a safety event.
 
 The tested OCR cases are `3x+6=12`, `x^2=16`, `2(x+1)=8`, and `5x-3=2x+9`, all recognized at
 1.0 confidence from clean renders. Real photos are an explicit provider boundary.
